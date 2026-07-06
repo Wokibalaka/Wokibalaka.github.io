@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Anime Without Ads</title>
+<style>
+  html, body { height: 100%; margin: 0; }
+  #iframeContainer { 
+    width: 100%; height: 100%; 
+    font-family: Arial, sans-serif; 
+    font-size: 18px; 
+    text-align: center; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+  }
+  #iframeContainer iframe { width: 100%; height: 100%; border: none; }
+</style>
+</head>
+<body>
+
+<div id="iframeContainer">Loading...</div>
+
+<script>
+  // ----------------------------
+  // USER VARIABLES (editable)
+  // ----------------------------
+  var siteName     = "Anime";       
+  var myColor      = "#00AEEF";            
+  var myOwnPicture = "https://via.placeholder.com/150";
+  var myLogo       = "https://via.placeholder.com/120x60"; // ✅ New: logo support
+  var live         = "yes";  
+  var siteUrl      = "https://ani.sitev3.com";          
+
+  // Social links
+  var discord   = "https://discord.gg/F9CQJVdfe9";
+  var github    = "https://github.com/";
+  var telegram  = "https://t.me/+YcJ92fTKcbs3Y2Jk";
+  var instagram = "https://www.instagram.com/animapo";
+
+  // ----------------------------
+  // EMBED LOGIC
+  // ----------------------------
+  function showIframe() {
+    // Base URL = your PHP-powered domain
+    var iframeUrl = "https://legal.animapo/" +
+                    "?siteName="     + encodeURIComponent(siteName) +
+                    "&pColor="       + encodeURIComponent(myColor) +
+                    "&myOwnPicture=" + encodeURIComponent(myOwnPicture) +
+                    "&logoUrl="      + encodeURIComponent(myLogo) +
+                    "&discord="      + encodeURIComponent(discord) +
+                    "&github="       + encodeURIComponent(github) +
+                    "&telegram="     + encodeURIComponent(telegram) +
+                    "&instagram="    + encodeURIComponent(instagram) +
+                    "&live="         + encodeURIComponent(live) +
+                    "&beginnerSite=" + encodeURIComponent(siteUrl);
+
+    var iframe = document.createElement("iframe");
+    iframe.src = iframeUrl;
+    iframe.title = siteName;
+    iframe.setAttribute("sandbox", "allow-scripts allow-same-origin allow-popups allow-forms");
+    iframe.setAttribute("allow", "fullscreen; autoplay");
+
+    var container = document.getElementById("iframeContainer");
+    container.innerHTML = "";
+    container.appendChild(iframe);
+  }
+
+  function showOfflineMessage() {
+    document.getElementById("iframeContainer").innerHTML =
+      "This site is currently offline. Set <code>live = \"yes\"</code> in your JS to enable.";
+  }
+
+  // ----------------------------
+  // MAIN
+  // ----------------------------
+  if (live === "yes") {
+    showIframe();
+  } else {
+    showOfflineMessage();
+  }
+</script>
+
+<noscript>
+  <div>Please enable JavaScript to view this embedded anime player.</div>
+</noscript>
+
+</body>
+</html>
